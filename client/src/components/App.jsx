@@ -22,14 +22,15 @@ const App = (props) => {
   }
 
   const addMovie = (title) => {
-    const newMovie = {title};
+    //create a newMovie variable , initiaze with title and watched status :falsed
+    const newMovie = {title, watched:false};
     setMovies([...movies, newMovie]);
   }
 
   //add a toggel function to toggle the status of movie
-  const toggleWatched = (index) => {
-    setMovies(movie => movies.map((movie,i) => {
-      if (i === index) {
+  const toggleWatched = (moviesToToggle) => {
+    setMovies(movie => movies.map(movie => {
+      if (movie.title === moviesToToggle.title) {
         return {...movie, watched : !movie.watched}
       }
         return movie;

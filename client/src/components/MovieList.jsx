@@ -19,10 +19,10 @@ var MovieList =({ movies, searchMade,toggleWatched }) => {
 
   return (
     <div>
-        {movies.map((movie,index) => (
-          <li key= {index}>{ movie.title }
-          <button onClick={() => toggleWatched(index)} style={ButtonColor(movie.watched)}>
-            {movie.watched ? "watched" :"Not Watched"}</button></li>
+        {movies.map((movie) => (
+          <li key= {movie.title}>{ movie.title }
+          <button onClick={() => toggleWatched(movie)} style={ButtonColor(movie.watched)}>
+            {movie.watched ? "watched" :"Add to watched list"}</button></li>
         ))}
     </div>
   )

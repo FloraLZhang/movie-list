@@ -9,6 +9,8 @@ var AddMovie = (props) => {
   }
   const handleAddClick =() => {
     props.onAdd(title);
+    //Reset the title state to empy string, so next time add movie we dont need to delete the previous typing
+    setTitle('');
   }
   return (
     <div>
