@@ -11,9 +11,9 @@ var MovieList =({ movies, searchMade,toggleWatched }) => {
 
   //if toggle the watch button, the button turn green. otherwise the button is gray
 
-  const ButtonColor = (watched) => (
+  const ButtonColor = (watchstatus) => (
 
-      {backgroundColor: watched? 'lightgreen':'lightgrey'}
+      { backgroundColor: watchstatus === 'Watched' ? 'lightgreen' : 'lightgrey',}
 
   );
 
@@ -21,8 +21,8 @@ var MovieList =({ movies, searchMade,toggleWatched }) => {
     <div>
         {movies.map((movie) => (
           <li key= {movie.title}>{ movie.title }
-          <button onClick={() => toggleWatched(movie)} style={ButtonColor(movie.watched)}>
-            {movie.watched ? "Watched" :"Not Watched"}</button></li>
+          <button onClick={() => toggleWatched(movie)} style={ButtonColor(movie.watchstatus)}>
+            {movie.watchstatus}</button></li>
         ))}
     </div>
   )

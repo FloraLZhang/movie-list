@@ -62,23 +62,50 @@ const App = (props) => {
     });
   }
 
+
+  // //add a toggel function to toggle the status of movie
+  // const toggleWatched = (moviesToToggle) => {
+  //    const updateMovies = movies.map(movie => {
+  //     if (movie.title === moviesToToggle.title) {
+  //       return {...movie, watched : !movie.watched}
+  //     }
+  //       return movie;
+  //   });
+  //   setMovies(updateMovies);
+  //   setDisplayMovies(updateMovies);
+  // }
+
+
   //add a toggel function to toggle the status of movie
-  const toggleWatched = (moviesToToggle) => {
-     const updateMovies = movies.map(movie => {
-      if (movie.title === moviesToToggle.title) {
-        return {...movie, watched : !movie.watched}
-      }
+  const toggleWatched = (movieToToggle) => {
+      // Determine the new watch status based on the current one
+  const newWatchStatus = movieToToggle.watchstatus === 'Not Watched' ? 'Watched' : 'Not Watched';
+
+  // Send a PUT request to update the watch status in the database
+  axios.put(`/movies/${movieToToggle.id}`, { watchstatus: newWatchStatus })
+    .then(response => {
+      console.log('Update successful:', response.data);
+      // Fetch the updated list of movies or update the state directly
+      // For simplicity, we're updating the state directly here
+      const updatedMovies = movies.map(movie => {
+        if (movie.id === movieToToggle.id) {
+          return { ...movie, watchstatus: newWatchStatus };
+        }
         return movie;
+      });
+      setMovies(updatedMovies);
+      setDisplayMovies(updatedMovies);
+    })
+    .catch(error => {
+      console.error('Failed to update movie status:', error);
     });
-    setMovies(updateMovies);
-    setDisplayMovies(updateMovies);
   }
 
 
 //Filter displaymovies throuth currentlist
   const filteredMovies= displayMovies.filter(movie => {
-    if (currentList === 'watched') return movie.watched;
-    if (currentList === 'toWatch') return !movie.watched;
+    if (currentList === 'watched') return movie.watchstatus === 'Watched';
+    if (currentList === 'toWatch') return movie.watchstatus === 'Not Watched';
     //oterwise return the full movie list
     return true;
   })

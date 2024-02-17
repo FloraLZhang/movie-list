@@ -26,5 +26,19 @@ module.exports.movies = {
       }
     });
   },
+
+  //update the watch status
+  update: function(movie, callback) {
+    const query ='UPDATE movies SET watchstatus = ? WHERE id = ?';
+    db.query(query, [movie.watchstatus, movie.id],(err,result) =>{
+      if(err){
+        console.error('Failed to update movie watchstatus:', err);
+        callback(err);
+      } else {
+        callback(null,result);
+      }
+
+    })
+  }
 };
 

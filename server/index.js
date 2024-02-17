@@ -19,6 +19,7 @@ app.use(express.json());
 var controller = require('./controller');
 app.get('/movies', controller.movies.get);
 app.post('/movies', controller.movies.post);
+app.put('/movies/:id',controller.movies.put);
 
 //serve the client file
 app.use(express.static('client/dist'));
