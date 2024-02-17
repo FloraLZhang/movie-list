@@ -8,7 +8,7 @@ var AddMovie = (props) => {
     setTitle(event.target.value);
   }
   const handleAddClick =() => {
-    props.onAdd(title);
+    props.onAdd({ title: title, watchstatus: 'Not Watched' });
     //Reset the title state to empy string, so next time add movie we dont need to delete the previous typing
     setTitle('');
   }

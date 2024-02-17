@@ -22,7 +22,7 @@ var MovieList =({ movies, searchMade,toggleWatched }) => {
         {movies.map((movie) => (
           <li key= {movie.title}>{ movie.title }
           <button onClick={() => toggleWatched(movie)} style={ButtonColor(movie.watched)}>
-            {movie.watched ? "watched" :"Add to watched list"}</button></li>
+            {movie.watched ? "Watched" :"Not Watched"}</button></li>
         ))}
     </div>
   )
